@@ -1,5 +1,6 @@
 package com.fernando.blogPessoal.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -22,11 +23,23 @@ public class Postagem {
     @Temporal(TemporalType.TIMESTAMP)
     private Date data = new java.sql.Date(System.currentTimeMillis());
 
+    @ManyToOne
+    @JsonIgnoreProperties("postagem")
+    private Tema tema;
+
     public Postagem(long id, @Size(min = 3, max = 100) String titulo, @Size(min = 3, max = 100) String texto, Date data) {
         this.id = id;
         this.titulo = titulo;
         this.texto = texto;
         this.data = data;
+    }
+
+    public Tema getTema() {
+        return tema;
+    }
+
+    public void setTema(Tema tema) {
+        this.tema = tema;
     }
 
     public Postagem() {
