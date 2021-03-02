@@ -3,7 +3,7 @@ package com.fernando.blogPessoal.model;
 public class UserLogin {
 
     private String nome;
-    private String email;
+    private String usuario;
     private String senha;
     private String token;
 
@@ -15,12 +15,12 @@ public class UserLogin {
         this.nome = nome;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 
     public String getSenha() {
