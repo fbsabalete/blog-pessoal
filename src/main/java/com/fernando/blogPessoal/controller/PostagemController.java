@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/postagens")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class PostagemController {
 
     @Autowired
