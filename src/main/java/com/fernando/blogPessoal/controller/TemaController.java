@@ -2,6 +2,7 @@ package com.fernando.blogPessoal.controller;
 
 import java.util.List;
 
+import com.fernando.blogPessoal.model.Postagem;
 import com.fernando.blogPessoal.model.Tema;
 import com.fernando.blogPessoal.repository.TemaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +37,19 @@ public class TemaController {
 		return repository.findById(id).map(obj -> ResponseEntity.ok(obj)).orElse(ResponseEntity.notFound().build());
 	}
 
+	@GetMapping("/nome/{nome}")
+	public ResponseEntity<List<Tema>> update(@PathVariable String nome) {
+		return ResponseEntity.ok(repository.findAllByDescricaoContainingIgnoreCase(nome));
+	}
+
 	@PostMapping
 	public ResponseEntity<Tema> create(@RequestBody Tema tema) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(tema));
 	}
 
-	@PutMapping("/nome/{nome}")
-	public ResponseEntity<Tema> update(@RequestBody Tema tema) {
-		return ResponseEntity.ok(repository.save(tema));
+	@PutMapping
+	public ResponseEntity<Tema> update (@RequestBody Tema tema){
+		return ResponseEntity.status(HttpStatus.OK).body(repository.save(tema));
 	}
 
 	@DeleteMapping("/{id}")
