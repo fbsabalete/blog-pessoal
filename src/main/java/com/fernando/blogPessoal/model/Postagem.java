@@ -27,6 +27,18 @@ public class Postagem {
     @JsonIgnoreProperties("postagem")
     private Tema tema;
 
+    @ManyToOne
+    @JsonIgnoreProperties("usuario")
+    private Usuario usuario;
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public Postagem(long id, @Size(min = 3, max = 100) String titulo, @Size(min = 3, max = 100) String texto, Date data) {
         this.id = id;
         this.titulo = titulo;
