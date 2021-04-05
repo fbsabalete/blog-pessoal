@@ -1,9 +1,12 @@
 package com.fernando.blogPessoal.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
@@ -14,16 +17,47 @@ public class Usuario {
     private long id;
 
     @NotNull
-    @Size(min = 3, max = 50)
+    @Size(min = 2, max = 50)
     private String nome;
 
     @NotNull
-    @Size(min = 3, max = 50)
+    @Size(min = 2, max = 50, message = "usuario deve ter entre 3 e 50 caracteres")
     private String usuario;
 
     @NotNull
-    @Size(min = 5, max = 255)
     private String senha;
+
+    private String foto;
+
+    private String tipo = "normal";
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+    @JsonIgnoreProperties("usuario")
+    private List<Postagem> postagem;
+
+    public List<Postagem> getPostagem() {
+        return postagem;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setPostagem(List<Postagem> postagem) {
+        this.postagem = postagem;
+    }
 
     public long getId() {
         return id;
